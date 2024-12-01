@@ -1,8 +1,11 @@
-use std::{fs::File, io::BufReader};
+use std::{
+    fs::File,
+    io::{BufRead, BufReader, Lines},
+};
 
-pub fn read_file_and_return_buf_reader(file_name: &str) -> std::io::Result<BufReader<File>> {
+pub fn read_file_and_return_lines(file_name: &str) -> std::io::Result<Lines<BufReader<File>>> {
     let file = File::open(file_name)?;
-    Ok(BufReader::new(file))
+    Ok(BufReader::new(file).lines())
 }
 pub fn count_ocurences(vec: &Vec<i32>, num: i32) -> usize {
     vec.iter().filter(|&n| *n == num).count()
