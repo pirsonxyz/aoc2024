@@ -6,7 +6,7 @@ fn main() -> std::io::Result<()> {
     let mut list2: Vec<i32> = Vec::new();
     let mut distance_total = 0;
 
-    let lines = read_file_and_return_lines("inputs/day1.txt")?;
+    let lines = read_file_and_return_lines("inputs/day1.input")?;
     for line in lines {
         if let Ok(line) = line {
             let (distance1, distance2) = line.split_once("  ").unwrap();
