@@ -1,4 +1,4 @@
-use aoc2024::{count_ocurences, read_file_and_return_lines};
+use aoc2024::{count_occurrences, read_file_and_return_lines};
 
 fn main() -> std::io::Result<()> {
     // Part1
@@ -26,15 +26,15 @@ fn main() -> std::io::Result<()> {
     println!("{}", distance_total);
 
     // Part2
-    let mut ocurrence_score: i32 = 0;
+    let mut occurrence_score: i32 = 0;
     for n in list1 {
-        let num_of_ocurrences = count_ocurences(&list2, n);
-        if num_of_ocurrences == 0 {
+        let num_of_occurrences = count_occurrences(&list2, n);
+        if num_of_occurrences == 0 {
             continue;
         }
-        let ocurrence_s = n * num_of_ocurrences as i32;
-        ocurrence_score += ocurrence_s;
+        let occurrence_s = n * num_of_occurrences as i32;
+        occurrence_score += occurrence_s;
     }
-    println!("{}", ocurrence_score);
+    println!("{}", occurrence_score);
     Ok(())
 }
