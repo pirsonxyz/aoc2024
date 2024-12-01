@@ -1,6 +1,8 @@
 [package]
-name = "day1"
+name = "aoc2024"
 version = "0.1.0"
 edition = "2021"
-
+[[bin]]
+name = "day1"
+src = "src/day1.rs"
 [dependencies]

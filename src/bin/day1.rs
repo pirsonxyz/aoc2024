@@ -1,15 +1,14 @@
-use std::{
-    fs::File,
-    io::{BufRead, BufReader},
-};
+use std::io::BufRead;
+
+use aoc2024::{count_ocurences, read_file_and_return_buf_reader};
 
 fn main() -> std::io::Result<()> {
     // Part1
     let mut list1: Vec<i32> = Vec::new();
     let mut list2: Vec<i32> = Vec::new();
     let mut distance_total = 0;
-    let file = File::open("day1.txt")?;
-    let buf_reader = BufReader::new(file);
+
+    let buf_reader = read_file_and_return_buf_reader("inputs/day1.txt")?;
     for line in buf_reader.lines() {
         if let Ok(line) = line {
             let (distance1, distance2) = line.split_once("  ").unwrap();
@@ -41,7 +40,4 @@ fn main() -> std::io::Result<()> {
     }
     println!("{}", ocurrence_score);
     Ok(())
-}
-fn count_ocurences(vec: &Vec<i32>, num: i32) -> usize {
-    vec.iter().filter(|&n| *n == num).count()
 }
