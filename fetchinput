@@ -1,0 +1,3 @@
+#!/bin/bash
+url="https://adventofcode.com/2024/day/$1/input"
+curl -b "session=$AOC_SESSION" "$url"
