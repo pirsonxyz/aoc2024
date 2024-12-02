@@ -13,3 +13,34 @@ where
 {
     vec.iter().filter(|&n| *n == num).count()
 }
+pub fn is_valid_report(numbers: &[i32]) -> bool {
+    if numbers.len() < 2 {
+        return false;
+    }
+    let first_diff = numbers[1] - numbers[0];
+    if first_diff == 0 {
+        return false;
+    }
+    let is_increasing = first_diff > 0;
+    numbers.windows(2).all(|w| {
+        let diff = w[1] - w[0];
+        if is_increasing {
+            diff >= 1 && diff <= 3
+        } else {
+            diff <= -1 && diff >= -3
+        }
+    })
+}
+pub fn is_valid_with_dampener(numbers: &[i32]) -> bool {
+    if is_valid_report(numbers) {
+        return true;
+    }
+    for i in 0..numbers.len() {
+        let mut nums_vec = numbers.to_vec();
+        nums_vec.remove(i);
+        if is_valid_report(&nums_vec) {
+            return true;
+        }
+    }
+    false
+}
