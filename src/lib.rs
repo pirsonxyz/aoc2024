@@ -3,6 +3,8 @@ use std::{
     io::{BufRead, BufReader, Lines},
 };
 
+use regex::Regex;
+
 pub fn read_file_and_return_lines(file_name: &str) -> std::io::Result<Lines<BufReader<File>>> {
     let file = File::open(file_name)?;
     Ok(BufReader::new(file).lines())
@@ -43,4 +45,10 @@ pub fn is_valid_with_dampener(numbers: &[i32]) -> bool {
         }
     }
     false
+}
+pub fn valid_mul_instr(instr: &str) -> i32 {
+    let re = Regex::new(r"mul\((\d{1,3}),(\d{1,3})\)").unwrap();
+    re.captures_iter(instr)
+        .map(|_match| &_match[1].parse::<i32>().unwrap() * &_match[2].parse::<i32>().unwrap())
+        .sum()
 }
