@@ -1,15 +1,11 @@
 use anyhow::Result;
-use aoc2024::{read_file_and_return_lines, valid_mul_instr};
+use aoc2024::{valid_do_dont, valid_mul_instr};
+use std::fs;
 
 fn main() -> Result<()> {
-    let lines = read_file_and_return_lines("inputs/day3.input")?;
-    let mut total = 0;
-    for line in lines {
-        let line = line?;
-        //let sum = valid_mul_instr(&line);
-        let sum = valid_mul_instr(&line.trim());
-        total += sum;
-    }
+    let input = fs::read_to_string("inputs/day3.input").unwrap();
+    //let mut total = 0;
+    let total = valid_do_dont(&input);
     println!("{}", total);
     Ok(())
 }

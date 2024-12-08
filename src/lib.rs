@@ -52,3 +52,22 @@ pub fn valid_mul_instr(instr: &str) -> i32 {
         .map(|_match| &_match[1].parse::<i32>().unwrap() * &_match[2].parse::<i32>().unwrap())
         .sum()
 }
+pub fn valid_do_dont(instr: &str) -> i32 {
+    let mut on = true;
+    let mut total = 0;
+    let re = Regex::new(r"do\(\)|don't\(\)|mul\((\d+),(\d+)\)").unwrap();
+    for cap in re.captures_iter(instr) {
+        let full_match = cap.get(0).unwrap().as_str();
+        if full_match == "do()" {
+            on = true;
+        } else if full_match == "don't()" {
+            on = false;
+        } else if on {
+            // For mul instructions, we'll have capture groups
+            let x = cap.get(1).unwrap().as_str().parse::<i32>().unwrap();
+            let y = cap.get(2).unwrap().as_str().parse::<i32>().unwrap();
+            total += x * y;
+        }
+    }
+    total
+}
