@@ -36,7 +36,6 @@ fn main() -> std::io::Result<()> {
     for n in left {
         occurrence_score += n * map_of_ocurrences.get(&n).unwrap_or(&0);
     }
-    println!("{:?}", map_of_ocurrences);
     println!("{}", occurrence_score);
     Ok(())
 }
