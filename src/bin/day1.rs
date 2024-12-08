@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use aoc2024::{count_occurrences, read_file_and_return_lines};
 
 fn main() -> std::io::Result<()> {
@@ -27,14 +29,14 @@ fn main() -> std::io::Result<()> {
 
     // Part2
     let mut occurrence_score: i32 = 0;
-    for n in left {
-        let num_of_occurrences = count_occurrences(&right, n);
-        if num_of_occurrences == 0 {
-            continue;
-        }
-        let occurrence_s = n * num_of_occurrences as i32;
-        occurrence_score += occurrence_s;
+    let mut map_of_ocurrences: HashMap<i32, i32> = HashMap::new();
+    for &n in &right {
+        *map_of_ocurrences.entry(n).or_insert(0) += 1;
     }
+    for n in left {
+        occurrence_score += n * map_of_ocurrences.get(&n).unwrap_or(&0);
+    }
+    println!("{:?}", map_of_ocurrences);
     println!("{}", occurrence_score);
     Ok(())
 }
